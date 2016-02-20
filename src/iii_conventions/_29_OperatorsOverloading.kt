@@ -20,12 +20,25 @@ fun todoTask29(): Nothing = TODO(
     })
 
 fun task29_1(today: MyDate): MyDate {
-    todoTask29()
-//    return today + YEAR + WEEK
+    return today + YEAR + WEEK
 }
 
+infix operator fun MyDate.plus(interval: MultipleTimeInterval): MyDate {
+    val (type, num) = interval;
+    return this.addTimeIntervals(type, num);
+}
+
+infix operator fun MyDate.plus(interval: TimeInterval): MyDate {
+    return this + interval * 1;
+}
+
+infix operator fun TimeInterval.times(num: Int): MultipleTimeInterval  {
+    return MultipleTimeInterval(this, num)
+}
+
+data class MultipleTimeInterval(val intervalType: TimeInterval, val num: Int)
+
 fun task29_2(today: MyDate): MyDate {
-    todoTask29()
-//    return today + YEAR * 2 + WEEK * 3 + DAY * 5
+    return today + YEAR * 2 + WEEK * 3 + DAY * 5
 }
 
